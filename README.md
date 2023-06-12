@@ -3,3 +3,5 @@
 
 
 Community driven WotLK Rotations on Awful
+
+https://awful.wtf/
