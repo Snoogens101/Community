@@ -1,0 +1,72 @@
+{
+  "load": [
+    "core",
+    "lists",
+    "gui",
+    "items",
+    {
+      "name": "pvp",
+      "root": "pvp/",
+      "files": [
+        "draws",
+        "events"
+      ]
+    },
+    {
+      "name": "pve",
+      "root": "pve/",
+      "files": [
+        "draws",
+        "events"
+      ]
+    },
+    {
+      "name": "marksmanship",
+      "root": "hunter/marksmanship",
+      "files": [
+        "spells",
+        "tick",
+        "actor",
+        // PVE
+        "pve/spells",
+        "pve/control",
+        "pve/dispel",
+        "pve/interrupt",
+        "pve/stomp",
+        "pve/trap",
+        "pve/apl",
+        // PVP
+        "pvp/spells",
+        "pvp/control",
+        "pvp/dispel",
+        "pvp/interrupt",
+        "pvp/stomp",
+        "pvp/trap",
+        "pvp/apl"
+      ]
+    },
+    {
+      "name": "unholy",
+      "root": "deathknight/unholy",
+      "files": [
+        "spells",
+        "tick",
+        "actor",
+        // PVE
+        "pve/spells",
+        "pve/control",
+        "pve/dispel",
+        "pve/interrupt",
+        "pve/stomp",
+        "pve/apl",
+        // PVP
+        "pvp/spells",
+        "pvp/control",
+        "pvp/dispel",
+        "pvp/interrupt",
+        "pvp/stomp",
+        "pvp/apl"
+      ]
+    }
+  ]
+}
