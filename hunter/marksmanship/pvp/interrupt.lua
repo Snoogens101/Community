@@ -11,7 +11,7 @@ local CastInterruptDelay = awful.delay(0.374, 0.564)
 local CastFinishDelay = awful.delay(0.21, 0.44)
 local ChannelInterruptDelay = awful.delay(0.61, 0.84)
 
-SilencingShot:Callback("Interrupt", function(spell)
+marksmanship.SilencingShot:Callback("Interrupt", function(spell)
 
   local castDelay = CastInterruptDelay.now
   local finishDelay = CastFinishDelay.now

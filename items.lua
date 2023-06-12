@@ -5,27 +5,7 @@ if proj.LoadCheck() then return end
 local talents = proj.ID.talent
 
 -- Healthstone
-local healthstone = awful.Item(5512)
-local checkedHealthstone = 0
-function proj.GrabHealthstone()
-  if awful.time - checkedHealthstone < 1 then return end
-  if healthstone.count > 0 then return end
-  if player.casting or player.channeling then return end
-  if not player.buff("Preparation") then return end
-
-  local soulwell = awful.objects.within(5).find(function(obj) return obj.id and obj.id == 303148 and obj.creator.friend end)
-  if soulwell then
-    soulwell:interact()
-    proj.ShortAlert("Grabbing Healthstone", 344026)
-    checkedHealthstone = awful.time
-    if awful.DevMode then
-      awful.print("Debug: Grabbing Healthstone")
-    end
-    return
-  end
-  checkedHealthstone = awful.time
-end
-
+local healthstone = awful.Item({36894,36893,36892,36891,36890,36889,22105,22104,22103})
 local healthstoneUsed = 0
 function proj.Healthstone()
   if healthstoneUsed > 0 and awful.time - healthstoneUsed < 15 then return end
@@ -41,6 +21,58 @@ function proj.Healthstone()
     end
     if awful.DevMode then
       awful.print("Debug: Using Healthstone")
+    end
+  end
+end
+
+-- Health Potion
+local healthPotion = awful.Item({
+  43569, --endless-healing-potion
+  41166, --runic-healing-injector
+  33447, --runic-healing-potion
+})
+local healthPotionUsed = 0
+function proj.HealthPotion()
+  if awful.arena then return end
+  if healthPotionUsed > 0 and awful.time - healthPotionUsed < 15 then return end
+  if not awful.hasControl then return end
+  if not player.combat then return end
+  if healthPotion.count == 0 then return end
+  if healthPotion.cd > 0 then return end
+  if not healthPotion.usable then return end
+
+  if player.hp < 25 then
+    if healthPotion:Use() then
+      healthPotionUsed = awful.time
+    end
+    if awful.DevMode then
+      awful.print("Debug: Using Health Potion")
+    end
+  end
+end
+
+-- Mana Potion
+local manaPotion = awful.Item({
+  43570, --endless-mana-potion
+  42545, --runic-mana-injector
+  33448, --runic-mana-potion
+})
+local manaPotionUsed = 0
+function proj.ManaPotion()
+  if awful.arena then return end
+  if manaPotionUsed > 0 and awful.time - manaPotionUsed < 15 then return end
+  if not awful.hasControl then return end
+  if not player.combat then return end
+  if manaPotion.count == 0 then return end
+  if manaPotion.cd > 0 then return end
+  if not manaPotion.usable then return end
+
+  if player.manaPct < 25 then
+    if manaPotion:Use() then
+      manaPotionUsed = awful.time
+    end
+    if awful.DevMode then
+      awful.print("Debug: Using Mana Potion")
     end
   end
 end
