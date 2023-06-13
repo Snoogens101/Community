@@ -5,7 +5,8 @@ if proj.DeathKnightCheck() then return end
 
 local deathknight = proj.deathknight
 local unholy = proj.deathknight.unholy
-local talents = proj.ID.talent
+local talents = proj.ID.talent.deathknight
+local glyphs = proj.ID.glyph.deathknight
 
 local PetAttack = awful.unlock("PetAttack")
 
@@ -33,7 +34,6 @@ unholy.PlagueStrike:Callback("pvp_target", function(spell)
   end
 end)
 
--- check runes etc to see when to refresh
 -- Icy Touch
 unholy.IcyTouch:Callback("pvp_target", function(spell)
   if deathknight.FrostFever == 0 or target.debuffRemains("Frost Fever", player) < awful.gcd*2 then
@@ -50,10 +50,14 @@ unholy.ScourgeStrike:Callback("pvp_target", function(spell)
 end)
 
 -- Raise Dead
+local corpseDust = awful.Item(37201)
+unholy.RaiseDead:Callback("pvp_pet", function(spell)
+  if player.hasGlyph(glyphs.RaiseDead) or corpseDust.count > 0 then
+    spell:CastAlert()
+  end
+end)
 
 -- Summon Gargoyle (snapshots "Unholy Strength", Blood Fury, Badge etc)
-
--- Ghoul Frenzy (Defensive)
 
 -- Ghoul Frenzy (Offensive)
 
@@ -64,14 +68,6 @@ unholy.BloodStrike:Callback("pvp_target", function(spell)
   end
 end)
 
--- Death and Decay (stealth getter)
-
--- Death Pact (Defensive)
-
--- Lichborn (Defensive)
-
--- Death Coil (Defensive (with Lichborne))
-
 -- Death Coil (Offensive)
 unholy.DeathCoil:Callback("pvp_target", function(spell)
   if player.powerMax - player.power <= 10 or target.debuff("Blood Plague", player) and target.debuff("Frost Fever", player) and target.debuffRemains("Unholy Blight") < awful.gcd*2 then
@@ -79,6 +75,16 @@ unholy.DeathCoil:Callback("pvp_target", function(spell)
   end
 end)
 
+-- Death and Decay (stealth getter)
+
 -- Death Strike (Defensive)
 
 -- Anti-Magic Shell (Defensive)
+
+-- Death Pact (Defensive)
+
+-- Lichborn (Defensive)
+
+-- Death Coil (Defensive (with Lichborne))
+
+-- Ghoul Frenzy (Defensive)

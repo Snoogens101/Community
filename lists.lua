@@ -218,6 +218,16 @@ proj.ID = {
       HunterVsWild = { 3, 27 },
       TNT = { 3, 28 },
     }
+  },
+  glyph = {
+    deathknight = {
+      DarkDeath       = 63333,
+      Pestilence      = 59309,
+      DeathsEmbrace   = 58677,
+      AntiMagicShell  = 58623,
+      RaiseDead       = 60200,
+      TheGhoul        = 58686,
+    }
   }
 }
 
