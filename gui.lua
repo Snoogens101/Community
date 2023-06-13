@@ -25,14 +25,14 @@ local ui, settings, cmd = awful.UI:New('Community', {
 	title = title[awful.player.class2][1],
 	colors = {
 		title = titleColor[awful.player.class2],
-		primary = primaryColor[awful.player.class2],
+		primary ={175, 175, 175, 0.8},
 		accent = accentColor[awful.player.class2],
 		background = {12, 12, 12, 0.6},
-		tertiary = {161, 161, 161, 0.15}
+		tertiary = {161, 161, 161, 0.5}
 	},
 	sidebar = false,
-	width = 340,
-	height = 225,
+	width = 355,
+	height = 255,
   scale = 0.9,
   show = true,
 })
@@ -42,5 +42,45 @@ proj.gui = ui
 proj.cmd = cmd
 
 local General = ui:Tab("General")
+General:Dropdown({
+  var = "autoTarget",
+  options = {
+      { label =  "None", value = 0},
+      { label =  "Open World", value = 1},
+      { label =  "Instance", value = 2},
+      { label =  "PvP", value = 3},
+  },
+  default = 0,
+  header = "Auto Target Mode:",
+})
+
 local Spells = ui:Tab("Spells")
+
 local Items = ui:Tab("Items")
+Items:Slider({
+  text = "Healthstone",
+  var = "healthstone",
+  min = 0,
+  max = 100,
+  default = 50,
+  size = 8,
+  valueType = " HP%",
+})
+Items:Slider({
+  text = "Health Potion",
+  var = "healthPotion",
+  min = 0,
+  max = 100,
+  default = 25,
+  size = 8,
+  valueType = " HP%",
+})
+Items:Slider({
+  text = "Mana Potion",
+  var = "manaPotion",
+  min = 0,
+  max = 100,
+  default = 25,
+  size = 8,
+  valueType = " MP%",
+})
