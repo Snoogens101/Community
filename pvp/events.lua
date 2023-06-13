@@ -9,6 +9,8 @@ end
 awful.addEventCallback(PauseVariable, "PLAYER_ENTERING_WORLD")
 awful.addEventCallback(PauseVariable, "PLAYER_LEAVING_WORLD")
 
+proj.PlayerGargoyle = 0
+
 awful.addEventCallback(function(eventInfo, eventType, sourceObject, destObject)
   local _, subEvent, _, sourceGUID, sourceName, _, _, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, _, auraType, extraSpellName, auraType2 = unpack(eventInfo)
   local time = awful.time
@@ -19,7 +21,9 @@ awful.addEventCallback(function(eventInfo, eventType, sourceObject, destObject)
 
       elseif sourceObject.friend then
         if sourceObject.isUnit(player) then
-
+          if spellID == 49206 then
+            proj.PlayerGargoyle = awful.time
+          end
         end
       end
     end

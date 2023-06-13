@@ -79,7 +79,7 @@ end
 
 -- Badge
 local badges = awful.Item({ 
-
+  46086, -- Platinum Disks of Battle
 })
 function proj.Badge()
   if not badges.equipped then return end

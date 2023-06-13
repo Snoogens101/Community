@@ -42,28 +42,28 @@ local SuperiorBuffs =
 }
 marksmanship.TrueshotAura:Callback("pvp_player_buff", function(spell)
   if not player.buffFrom(SuperiorBuffs) then
-    spell:CastAlert()
+    spell:Cast()
   end
 end)
 
 -- Hunter's Mark
 marksmanship.HuntersMark:Callback("pvp_target", function(spell)
   if target.debuffRemains(spell.id, player) < 2 then
-    spell:CastAlert(target)
+    spell:Cast(target)
   end
 end)
 
 -- Kill Shot
 marksmanship.KillShot:Callback("pvp_target", function(spell)
   if not hunter.Ranged then return end
-  spell:CastAlert(target)
+  spell:Cast(target)
 end)
 
 -- Serpent Sting
 marksmanship.SerpentSting:Callback("pvp_target", function(spell)
   if not hunter.Ranged then return end
   if target.debuffRemains(spell.id, player) < 2 then
-    spell:CastAlert(target)
+    spell:Cast(target)
   end
 end)
 
@@ -71,20 +71,20 @@ end)
 marksmanship.ChimeraShot:Callback("pvp_target_serpent", function(spell)
   if not hunter.Ranged then return end
   if target.debuffRemains(SerpentSting.id, player) >= 2 then
-    spell:CastAlert(target)
+    spell:Cast(target)
   end
 end)
 
 -- Aimed Shot
 marksmanship.AimedShot:Callback("pvp_target", function(spell)
   if not hunter.Ranged then return end
-  spell:CastAlert(target)
+  spell:Cast(target)
 end)
 
 -- Arcane Shot
 marksmanship.ArcaneShot:Callback("pvp_target", function(spell)
   if not hunter.Ranged then return end
-  spell:CastAlert(target)
+  spell:Cast(target)
 end)
 
 -- Silencing Shot
@@ -98,7 +98,7 @@ marksmanship.SteadyShot:Callback("pvp_target", function(spell)
   if ArcaneShot.cd - awful.gcdRemains <= 1 and ArcaneShot.cost.mana <= player.mana then
     return
   end
-  spell:CastAlert(target)
+  spell:Cast(target)
 end)
 
 -- Kill Command
@@ -138,7 +138,7 @@ marksmanship.Berserking:Callback("pvp_target_burst", function(spell)
   if not hunter.Ranged then return end
   if player.buffRemains(RapidFire.id) >= 8 then
     if target.debuffRemains(SerpentSting.id, player) > 2 and target.debuffRemains(HuntersMark.id, player) > 2 then
-      spell:CastAlert(player)
+      spell:Cast(player)
     end
   end
 end)
@@ -146,11 +146,11 @@ end)
 -- Mongoose Bite
 marksmanship.MongooseBite:Callback("pvp_target_melee", function(spell)
   if hunter.Ranged then return end
-  spell:CastAlert(target)
+  spell:Cast(target)
 end)
 
 -- Raptor Strike
 marksmanship.RaptorStrike:Callback("pvp_target_melee", function(spell)
   if hunter.Ranged then return end
-  spell:CastAlert(target)
+  spell:Cast(target)
 end)

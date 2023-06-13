@@ -6,9 +6,10 @@ if proj.HunterCheck() then return end
 local hunter = proj.hunter
 local marksmanship = proj.hunter.marksmanship
 local talents = proj.ID.talent
+local cfg = proj.settings
 
 function proj.PVP_APL()
-  if not proj.PVP then return end
+  if not proj.PVP and not (cfg.dummyRotation == "PvP" and target.dummy) then return end
 
   if not awful.hasControl then return end
   if player.mounted then return end

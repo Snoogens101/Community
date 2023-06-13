@@ -45,16 +45,24 @@ local General = ui:Tab("General")
 General:Dropdown({
   var = "autoTarget",
   options = {
-      { label =  "None", value = 0},
-      { label =  "Open World", value = 1},
-      { label =  "Instance", value = 2},
-      { label =  "PvP", value = 3},
+      { label =  "None", value = "None"},
+      { label =  "Open World", value = "Open World"},
+      { label =  "Instance", value = "Instance"},
+      { label =  "PvP", value = "PvP"},
   },
-  default = 0,
+  default = "None",
   header = "Auto Target Mode:",
 })
 
-local Spells = ui:Tab("Spells")
+General:Dropdown({
+  var = "dummyRotation",
+  options = {
+      { label =  "PvE", value = "PvE"},
+      { label =  "PvP", value = "PvP"},
+  },
+  default = "PvE",
+  header = "Rotation on Target Dummy:",
+})
 
 local Items = ui:Tab("Items")
 Items:Slider({

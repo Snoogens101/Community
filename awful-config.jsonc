@@ -25,6 +25,7 @@
       "name": "marksmanship",
       "root": "hunter/marksmanship",
       "files": [
+        "gui",
         "spells",
         "tick",
         "actor",
@@ -50,6 +51,7 @@
       "name": "unholy",
       "root": "deathknight/unholy",
       "files": [
+        "gui",
         "spells",
         "tick",
         "actor",
