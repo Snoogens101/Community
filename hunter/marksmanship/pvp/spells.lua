@@ -11,7 +11,7 @@ local PetAttack = awful.unlock("PetAttack")
 
 function marksmanship.PvPPetAttack()
   if pet.exists and not pet.dead then
-    if not awful.pet.target.exists or not awful.pet.target.isUnit(target) then
+    if not pet.target.exists or not pet.target.isUnit(target) then
       PetAttack()
     end
   end

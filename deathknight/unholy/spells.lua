@@ -58,3 +58,42 @@ awful.Populate({
   ScourgeStrike = Spell(55271, { targeted = true, damage = "physical" }),
   SummonGargoyle = Spell(49206, { beneficial = true }),
 }, unholy, getfenv(1))
+
+--[[
+  1 : BLOOD
+  2 : UNHOLY
+  3 : FROST
+  4 : DEATH
+--]]
+
+function deathknight.GetRuneTypeReady(type)
+  local runeAmount = 0
+  for i = 1, 6 do
+      if GetRuneType(i) == type or GetRuneType(i) == 4 then
+          local start, cd, ready = GetRuneCooldown(i)
+          if ready == true then runeAmount = runeAmount + 1 end
+      end
+  end
+  return runeAmount
+end
+
+function deathknight.TimeToRuneType(amount, type)
+  if amount == 0 then return 0 end
+  if deathknight.GetRuneTypeReady(type) >= amount then return 0 end
+  local runes = {}
+  for i = 1, 6 do
+      if GetRuneType(i) == type or GetRuneType(i) == 4 then
+          local rune = {}
+          local start, cd, ready = GetRuneCooldown(i)
+          if not ready then
+              rune.cd = start + cd - GetTime()
+              tinsert(runes, rune)
+          end
+      end
+  end
+  table.sort(runes, function(x, y) return x.cd < y.cd end)
+  local unsat = amount - deathknight.GetRuneTypeReady(type)
+  if unsat <= #runes then return runes[unsat].cd end
+  local nth = unsat - #runes
+  return runes[nth].cd
+end

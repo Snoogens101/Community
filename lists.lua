@@ -14,6 +14,8 @@ proj.ID = {
   },
   debuff = {
     Cyclone           = 33786,
+    BloodPlague       = 55078,
+    EbonPlague        = 51735,
   },
   buffGroup = {
     fullImmunity = {
