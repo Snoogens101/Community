@@ -3,6 +3,7 @@
     "core",
     "lists",
     "gui",
+    "commands",
     "items",
     {
       "name": "pvp",

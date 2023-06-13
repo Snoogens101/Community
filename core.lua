@@ -93,6 +93,18 @@ proj.PurpleAlert = function(msg, id, big)
   })
 end
 
+local rPerc, gPerc, bPerc, argbHex = GetClassColor(player.class2)
+proj.ClassRGB = { rPerc, gPerc, bPerc }
+proj.ClassHex = argbHex
+proj.ClassAlert = function(msg, id, big)
+  return awful.alert({
+    msg = msg,
+    texture = id,
+    big = big,
+    bgColor = {rPerc, gPerc, bPerc, 0.95}
+  })
+end
+
 local ignoreFacing = {
 
 }
