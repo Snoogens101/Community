@@ -21,6 +21,7 @@ awful.Populate({
   EscapeArtist = Spell(20589, { beneficial = true }),
   Shadowmeld = Spell(58984, { beneficial = true }),
 
+  -- ## HUNTER ## --
   AutoShot = Spell(75, { targeted = true, ranged = true, damage = "physical" }),
   AimedShot = Spell(49050, { targeted = true, ranged = true, damage = "physical" }),
   ArcaneShot = Spell(49045, { targeted = true, ranged = true, damage = "magic" }),
