@@ -26,7 +26,7 @@ end)
 -- Aspect of the Dragonhawk
 marksmanship.AspectOfTheDragonhawk:Callback("pvp_player_buff", function(spell)
   if not player.buff(spell.id) then
-    spell:CastAlert()
+    spell:Cast()
   end
 end)
 
@@ -110,7 +110,8 @@ marksmanship.KillCommand:Callback("pvp_target", function(spell)
   if pet.buff(spell.id) then return end
 
   if target.debuffRemains(SerpentSting.id, player) > 2 and target.debuffRemains(HuntersMark.id, player) > 2 then
-    spell:CastAlert(pet)
+    spell:Cast(pet)
+    return proj.ClassAlert(spell.name, spell.id, false)
   end
 end)
 
@@ -120,7 +121,8 @@ marksmanship.RapidFire:Callback("pvp_target_burst", function(spell)
   if not awful.burst then return end
   if player.buff(spell.id) then return end
   if target.debuffRemains(SerpentSting.id, player) > 2 and target.debuffRemains(HuntersMark.id, player) > 2 then
-    spell:CastAlert(player)
+    spell:Cast(player)
+    return proj.ClassAlert(spell.name, spell.id, false)
   end
 end)
 
@@ -128,7 +130,8 @@ end)
 marksmanship.Readiness:Callback("pvp_target_burst", function(spell)
   if RapidFire.cd > 60 and KillCommand.cd > 15 and AimedShot.cd - awful.gcdRemains > 0 and ChimeraShot.cd - awful.gcdRemains > 0 and ArcaneShot.cd - awful.gcdRemains > 0 then
     if target.debuffRemains(SerpentSting.id, player) > 2 and target.debuffRemains(HuntersMark.id, player) > 2 then
-      spell:CastAlert(player)
+      spell:Cast(player)
+      return proj.ClassAlert(spell.name, spell.id, false)
     end
   end
 end)

@@ -50,7 +50,7 @@ unholy.ScourgeStrike:Callback("pvp_target", function(spell)
   end
 end)
 
--- Death Strike (2x Diseases)
+-- Death Strike (2x Diseases, Defensive)
 unholy.DeathStrike:Callback("pvp_target", function(spell)
   if deathknight.BloodPlague == 0 or deathknight.FrostFever == 0 then return end
   if player.hp > cfg.deathStrike then return end
@@ -73,8 +73,10 @@ unholy.SummonGargoyle:Callback("pvp_buff", function(spell)
   if awful.burst or awful.burst_pressed and awful.time - awful.burst_pressed < 10 then
     if not player.buff("Unholy Strength") then return end
     unholy.BloodFury:Cast()
+    unholy.Berserking:Cast()
     proj.Badge()
-    spell:CastAlert(target)
+    spell:Cast(target)
+    return proj.ClassAlert(spell.name, spell.id, false)
   end
 end)
 
@@ -83,7 +85,8 @@ unholy.GhoulFrenzy:Callback("pvp_buff", function(spell)
   if not pet.exists then return end
   if awful.burst or awful.burst_pressed and awful.time - awful.burst_pressed < 10 then
     if target.cc or target.slow then
-      spell:CastAlert(pet)
+      spell:Cast(pet)
+      return proj.ClassAlert(spell.name, spell.id, false)
     end
   end
 end)
@@ -117,13 +120,11 @@ unholy.RuneStrike:Callback("pvp_target", function(spell)
   end
 end)
 
--- Death Strike (Defensive)
-
 -- Anti-Magic Shell (Defensive)
 
 -- Death Pact (Defensive)
 
--- Lichborn (Defensive)
+-- Lichborne (Defensive)
 
 -- Death Coil (Defensive (with Lichborne))
 
