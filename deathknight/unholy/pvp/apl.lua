@@ -17,6 +17,7 @@ function deathknight.PVP_APL()
   unholy.RaiseDead("pvp_pet")
   if deathknight.Level < 1 then return end
 
+  unholy.MindFreeze("pvp_interrupt")
   unholy.AutoAttack("pvp_target")
   unholy.PvPPetAttack()
   unholy.RuneStrike("pvp_target")
