@@ -15,9 +15,12 @@ function deathknight.PVP_APL()
   if player.mounted then return end
 
   unholy.RaiseDead("pvp_pet")
+  unholy.HornOfWinter("pvp_buff")
+  
   if deathknight.Level < 1 then return end
 
   unholy.MindFreeze("pvp_interrupt")
+  unholy.EmpowerRuneWeapon("pvp_buff")
   unholy.AutoAttack("pvp_target")
   unholy.PvPPetAttack()
   unholy.RuneStrike("pvp_target")
@@ -31,4 +34,5 @@ function deathknight.PVP_APL()
   unholy.ScourgeStrike("pvp_target")
   unholy.GhoulFrenzy("pvp_buff")
   unholy.BloodStrike("pvp_target")
+  unholy.HornOfWinter("pvp_runic")
 end

@@ -68,7 +68,7 @@ unholy.RaiseDead:Callback("pvp_pet", function(spell)
   end
 end)
 
--- Summon Gargoyle (snapshots "Unholy Strength", Blood Fury, Badge etc)
+-- Summon Gargoyle (Burst, snapshots "Unholy Strength", Blood Fury, Badge etc)
 unholy.SummonGargoyle:Callback("pvp_buff", function(spell)
   if awful.burst or awful.burst_pressed and awful.time - awful.burst_pressed < 10 then
     if not player.buff("Unholy Strength") then return end
@@ -80,7 +80,7 @@ unholy.SummonGargoyle:Callback("pvp_buff", function(spell)
   end
 end)
 
--- Ghoul Frenzy (Offensive)
+-- Ghoul Frenzy (Burst)
 unholy.GhoulFrenzy:Callback("pvp_buff", function(spell)
   if not pet.exists then return end
   if awful.burst or awful.burst_pressed and awful.time - awful.burst_pressed < 10 then
@@ -100,9 +100,13 @@ end)
 
 -- Death Coil (Offensive)
 unholy.DeathCoil:Callback("pvp_target", function(spell)
-  if unholy.SummonGargoyle.cd - awful.gcdRemains <= 0 and (awful.burst or awful.burst_pressed and awful.time - awful.burst_pressed < 10) then return end
-  if player.powerMax - player.power <= 10 or target.hp < 20 or target.debuff("Blood Plague", player) and target.debuff("Frost Fever", player) and target.debuffRemains("Unholy Blight") < awful.gcd*2 then
+  if player.powerMax - player.power <= 10 or target.hp < 20 then 
     spell:Cast(target)
+  else
+    if unholy.SummonGargoyle.cd - awful.gcdRemains <= 0 and (awful.burst or awful.burst_pressed and awful.time - awful.burst_pressed < 10) then return end
+    if target.debuff("Blood Plague", player) and target.debuff("Frost Fever", player) and target.debuffRemains("Unholy Blight") < awful.gcd*2 then
+      spell:Cast(target)
+    end
   end
 end)
 
@@ -113,6 +117,16 @@ unholy.BloodTap:Callback("pvp_buff", function(spell)
   end
 end)
 
+-- Empower Rune Weapon (Burst)
+unholy.EmpowerRuneWeapon:Callback("pvp_buff", function(spell)
+  if awful.burst or awful.burst_pressed and awful.time - awful.burst_pressed < 10 then
+    if deathknight.GetRuneTypeReady(Frost) == 0 and deathknight.GetRuneTypeReady(Unholy) == 0 then
+      spell:Cast()
+      return proj.ClassAlert(spell.name, spell.id, false)
+    end
+  end
+end)
+
 -- Rune Strike
 unholy.RuneStrike:Callback("pvp_target", function(spell)
   if not IsCurrentSpell(spell.id) then
@@ -120,14 +134,52 @@ unholy.RuneStrike:Callback("pvp_target", function(spell)
   end
 end)
 
+-- Horn of Winter (Buff)
+unholy.HornOfWinter:Callback("pvp_buff", function(spell)
+  if not player.buff("Horn of Winter") then
+    spell:Cast()
+  end
+end)
+
+-- Horn of Winter (Runic Power)
+unholy.HornOfWinter:Callback("pvp_runic", function(spell)
+  if player.powerMax - player.power >= 20 then
+    spell:Cast()
+  end
+end)
+
 -- Anti-Magic Shell (Defensive)
+-- hp threshold?
+-- incoming fat dmg like chaos bolt?
+-- avoid cc while bursting?
 
 -- Death Pact (Defensive)
+-- check for mortal wound debuffs?
+unholy.DeathPact:Callback("pvp_heal", function(spell)
+  if player.hp < 60 then
+    spell:Cast()
+    return proj.ClassAlert(spell.name, spell.id, false)
+  end
+end)
 
 -- Lichborne (Defensive)
+-- lichborne to deathcoil heal?
+-- lichborne to avoid cc while bursting?
 
 -- Death Coil (Defensive (with Lichborne))
+-- heal self when lichborne is active
 
 -- Ghoul Frenzy (Defensive)
+-- heal pet when pet low (hp threshold)
 
 -- Death and Decay (stealth getter)
+
+-- Icebound Fortitude
+-- hp threshold + offensive cds threshold
+-- something something vs rogues
+
+-- Anti-Magic Zone
+-- hp threshold + offensive cds threshold?
+
+-- Bone Shield
+-- idk tbh
