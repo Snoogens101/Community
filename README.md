@@ -14,4 +14,4 @@ https://awful.wtf/
 
 🟡 - Unusable, Work in Progress\
 🟠 - Usable, Work in Progress\
-🟢 - Usable, Good\
+🟢 - Usable, Good
