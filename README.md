@@ -14,5 +14,7 @@ https://awful.wtf/
 | Hunter  | Marksmanship  | 🟡 | 🟠 |
 
 🟡 - Unusable, Work in Progress
+
 🟠 - Usable, Work in Progress
+
 🟢 - Usable, Good
