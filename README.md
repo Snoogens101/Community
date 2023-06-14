@@ -7,3 +7,8 @@ Community driven WotLK Rotations on Awful
 Submit a Pull Request or join the Discord to suggest changes!
 
 https://awful.wtf/
+
+| Class  | Spec | PvE | PvP |
+| ------------- | ------------- | ------------- | ------------- |
+| Death Knight  | Unholy  | 🟠 | 🟠 |
+| Hunter  | Marksmanship  | 🟠 | 🟠 |
