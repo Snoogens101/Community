@@ -9,9 +9,9 @@ https://awful.wtf/
 
 | Class  | Spec | PvE | PvP |
 | ------------- | ------------- | ------------- | ------------- |
-| Death Knight  | Unholy  | 🟡 | 🟠 |
-| Hunter  | Marksmanship  | 🟡 | 🟠 |
+| Death Knight  | Unholy  | 🟠 | 🟡 | 
+| Hunter  | Marksmanship  | 🟠 | 🟡 |
 
-🟡 - Unusable, Work in Progress\
-🟠 - Usable, Work in Progress\
+🟠 - Unusable, Work in Progress\
+🟡 - Usable, Work in Progress\
 🟢 - Usable, Good
